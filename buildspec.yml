@@ -9,6 +9,7 @@ phases:
   build:
     commands:
       - npm run build
+      - aws s3 cp BuildArtifact.zip s3://mybucketappprueba/backups/build-$(date +%Y%m%d%H%M%S).zip
   post_build:
     commands:
       - echo "Build completed on `date`"
