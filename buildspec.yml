@@ -5,14 +5,14 @@ phases:
     runtime-versions:
       nodejs: 14
     commands:
-      - echo "Instalando dependencias"
       - npm install
   build:
     commands:
-      - echo "Ejecutando build..."
       - npm run build
-
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
 artifacts:
   files:
     - '**/*'
-  base-directory: dist
+  base-directory: 'dist' # Asumiendo que tu build genera archivos en la carpeta dist
