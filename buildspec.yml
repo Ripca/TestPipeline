@@ -6,15 +6,23 @@ phases:
       nodejs: 14
     commands:
       - npm install
+
   build:
     commands:
+      # 1. Compilar
       - npm run build
-      - zip -r BuildArtifact.zip dist/
-      - aws s3 cp BuildArtifact.zip s3://mybucketappprueba/backups/build-$(date +%Y%m%d%H%M%S).zip
+
+      # 2. Empaquetar todo lo generado en dist/ en un ZIP llamado backup.zip
+      - zip -r backup.zip dist/
+
+      # 3. Subir el backup comprimido al bucket S3 (con timestamp en el nombre)
+      - aws s3 cp backup.zip s3://mybucketappprueba/backups/backup-$(date +%Y%m%d%H%M%S).zip
+
   post_build:
     commands:
       - echo "Build completed on `date`"
+
 artifacts:
   files:
     - '**/*'
-  base-directory: 'dist' # Asumiendo que tu build genera archivos en la carpeta dist
+  base-directory: 'dist'
