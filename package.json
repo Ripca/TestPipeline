@@ -1,0 +1,9 @@
+{
+  "name": "mi-app-aws",
+  "version": "1.0.0",
+  "description": "Aplicación ejemplo para AWS CodePipeline",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html dist/ && cp app.js dist/ && cp styles.css dist/"
+  },
+  "devDependencies": {}
+}
